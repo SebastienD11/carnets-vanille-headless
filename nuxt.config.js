@@ -1,3 +1,12 @@
+import axios from 'axios'
+const dynamicRoutes = () => {
+  return axios
+    .get('https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=4')
+    .then((res) => {
+      return res.data.map((post) => `/${post.slug}`)
+    })
+}
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -20,7 +29,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/data.server.js', 'plugins/preview.client.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -34,8 +43,18 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@nuxtjs/axios'],
+
+  axios: {
+    baseURL:
+      process.env.VERCEL_ENV !== 'production'
+        ? 'https://carnets-vanille-headless.vercel.app/'
+        : 'http://localhost:3000/',
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  generate: {
+    routes: dynamicRoutes,
+  },
 }

@@ -1,25 +1,20 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">carnets-vanille-headless</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+  <div class="max-w-screen-lg mx-auto p-10">
+    <div v-for="(post, index) in posts" :key="post.id">
+      <div :key="index" class="lg:flex lg:max-w-screen-lg pb-8 lg:pb-16">
+        <div class="lg:w-1/4"></div>
+        <div class="lg:w-3/4 lg:pl-8">
+          <h4 class="text-xl lg:text-3xl font-normal leading-tight">
+            {{ post.title.rendered }}
+          </h4>
+          <p class="mb-4" v-html="post.content.rendered"></p>
+          <nuxt-link
+            :to="`/${post.slug}`"
+            class="btn-sm lg:btn btn-green mb-2 mr-2"
+          >
+            post Info
+          </nuxt-link>
+        </div>
       </div>
     </div>
   </div>
@@ -27,44 +22,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapState, mapActions } from 'vuex'
 
-export default Vue.extend({})
+export default Vue.extend({
+  computed: {
+    ...mapState(['posts']),
+  },
+  created() {
+    this.getPosts()
+  },
+  methods: {
+    ...mapActions(['getPosts']),
+  },
+})
 </script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>
