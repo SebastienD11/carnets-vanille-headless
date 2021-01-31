@@ -16,7 +16,7 @@ export const actions = {
     if (state.posts.length) return
     try {
       let posts = await this.$axios.$get(
-        `https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=4&_embed=1`
+        `https://www.hoteldesabers.com//wp-json/wp/v2/posts?page=1&per_page=4&_embed=1`
       )
       // filter out unnecessary data
       posts = posts.map(({ id, slug, title, content }) => ({
