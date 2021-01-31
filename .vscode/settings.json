@@ -1,0 +1,21 @@
+{
+  "prettier.disableLanguages": [
+    "javascript",
+    "vue"
+  ],
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[vue]": {
+    "editor.formatOnSave": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "vue"
+  ],
+  "vetur.validation.template": false,
+  "css.validate": false,
+}
