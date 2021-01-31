@@ -7,7 +7,7 @@
           <h4 class="text-xl lg:text-3xl font-normal leading-tight">
             {{ post.title.rendered }}
           </h4>
-          <p class="mb-4" v-html="post.content.rendered"></p>
+          <div class="mb-4" v-html="post.content.rendered"></div>
           <nuxt-link
             :to="`/${post.slug}`"
             class="btn-sm lg:btn btn-green mb-2 mr-2"

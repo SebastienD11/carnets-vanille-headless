@@ -1,6 +1,7 @@
 <template>
   <div class="max-w-screen-lg mx-auto p-10">
     {{ post.title.rendered }}
+    <div class="mb-4" v-html="post.content.rendered"></div>
   </div>
 </template>
 
