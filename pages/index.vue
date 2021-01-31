@@ -8,10 +8,7 @@
             {{ post.title.rendered }}
           </h4>
           <div class="mb-4" v-html="post.content.rendered"></div>
-          <nuxt-link
-            :to="`/${post.slug}`"
-            class="btn-sm lg:btn btn-green mb-2 mr-2"
-          >
+          <nuxt-link :to="`/${post.slug}`" class="underline p-4 text-red-500">
             post Info
           </nuxt-link>
         </div>
