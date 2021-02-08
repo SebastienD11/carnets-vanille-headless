@@ -1,7 +1,9 @@
 import axios from 'axios'
 const dynamicRoutes = () => {
   return axios
-    .get('https://www.hoteldesabers.com/wp-json/wp/v2/posts?page=1&per_page=8')
+    .get(
+      'https://blog.carnetsvanille.com/wp-json/wp/v2/posts?page=1&per_page=8'
+    )
     .then((res) => {
       return res.data.map((post) => `/${post.slug}`)
     })
