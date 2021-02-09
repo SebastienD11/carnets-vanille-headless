@@ -50,10 +50,9 @@ const GET_CATEGORIES = gql`
 export const actions = {
   async getPosts({ commit }) {
     // if posts is already set, stop
-    // if (state.posts.length) return
+    if (state.posts.length) return
     try {
       const posts = await this.app.apolloProvider.defaultClient.query({
-        // prefetch: true,
         query: GET_POSTS,
       })
       commit('SET_POSTS', posts.data.posts.nodes)
@@ -63,10 +62,9 @@ export const actions = {
   },
   async getCategories({ commit }) {
     // if categories is already set, stop
-    // if (state.categories.length) return
+    if (state.categories.length) return
     try {
       const categories = await this.app.apolloProvider.defaultClient.query({
-        // prefetch: true,
         query: GET_CATEGORIES,
       })
       commit('SET_CATEGORIES', categories.data.categories.nodes)

@@ -16,8 +16,6 @@ const dynamicRoutes = async () => {
 
   const routes = posts.concat(categories)
 
-  console.log(routes)
-
   return routes
 }
 
@@ -75,6 +73,7 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
   generate: {
+    concurrency: 20,
     routes: dynamicRoutes,
   },
 }
