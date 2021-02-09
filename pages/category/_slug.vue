@@ -58,8 +58,7 @@ export default Vue.extend({
     }
   },
   apollo: {
-    category: {
-      prefetch: true,
+    category: {\
       variables() {
         return { slug: this.$route.params.slug }
       },

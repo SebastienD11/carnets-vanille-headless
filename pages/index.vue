@@ -42,7 +42,6 @@ const GET_POSTS = gql`
 export default Vue.extend({
   apollo: {
     posts: {
-      prefetch: true,
       query: GET_POSTS,
     },
   },

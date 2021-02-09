@@ -34,7 +34,6 @@ export default Vue.extend({
   },
   apollo: {
     post: {
-      prefetch: true,
       variables() {
         return { slug: this.$route.params.slug }
       },

@@ -42,7 +42,6 @@ const GET_CATEGORIES = gql`
 export default Vue.extend({
   apollo: {
     categories: {
-      prefetch: true,
       query: GET_CATEGORIES,
     },
   },
