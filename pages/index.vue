@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-screen-lg mx-auto p-10">
-    <div v-for="(post, index) in posts" :key="post.id">
+    <div v-for="(post, index) in posts.nodes" :key="post.id">
       <div :key="index" class="lg:flex lg:max-w-screen-lg pb-8 lg:pb-16">
         <div class="lg:w-1/4"></div>
         <div class="lg:w-3/4 lg:pl-8">
@@ -17,19 +17,34 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
-import { mapState, mapActions } from 'vuex'
+import gql from 'graphql-tag'
+
+const GET_POSTS = gql`
+  query getPosts {
+    posts(first: 200) {
+      nodes {
+        id
+        slug
+        title
+        content
+        categories {
+          nodes {
+            categoryId
+          }
+        }
+      }
+    }
+  }
+`
 
 export default Vue.extend({
-  computed: {
-    ...mapState(['posts']),
-  },
-  created() {
-    this.getPosts()
-  },
-  methods: {
-    ...mapActions(['getPosts']),
+  apollo: {
+    posts: {
+      prefetch: true,
+      query: GET_POSTS,
+    },
   },
 })
 </script>

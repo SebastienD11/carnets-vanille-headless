@@ -6,7 +6,7 @@
     COUNT: {{ category.count }} <br />
     <hr />
 
-    <div v-for="(post, index) in postsForCategory" :key="post.id">
+    <div v-for="(post, index) in category.posts.nodes" :key="post.id">
       <div :key="index" class="lg:flex lg:max-w-screen-lg pb-8 lg:pb-16">
         <div class="lg:w-1/4"></div>
         <div class="lg:w-3/4 lg:pl-8">
@@ -24,7 +24,32 @@
 
 <script>
 import Vue from 'vue'
-import { mapState, mapActions } from 'vuex'
+import gql from 'graphql-tag'
+
+const GET_CATEGORY = gql`
+  query Category($slug: ID!) {
+    category(id: $slug, idType: SLUG) {
+      id
+      slug
+      name
+      count
+      description
+      posts(first: 200) {
+        nodes {
+          id
+          slug
+          title
+          content
+          categories {
+            nodes {
+              categoryId
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
 export default Vue.extend({
   data() {
@@ -32,27 +57,14 @@ export default Vue.extend({
       slug: this.$route.params.slug,
     }
   },
-  computed: {
-    ...mapState(['categories', 'posts']),
-    category() {
-      return this.categories.find((el) => el.slug === this.slug)
+  apollo: {
+    category: {
+      prefetch: true,
+      variables() {
+        return { slug: this.$route.params.slug }
+      },
+      query: GET_CATEGORY,
     },
-    postsForCategory() {
-      return this.posts.filter((el) => {
-        const categories = []
-        el.categories.nodes.forEach((category) => {
-          categories.push(category.categoryId)
-        })
-        return categories.includes(this.category.categoryId)
-      })
-    },
-  },
-  created() {
-    this.getCategories()
-    this.getPosts()
-  },
-  methods: {
-    ...mapActions(['getCategories', 'getPosts']),
   },
 })
 </script>

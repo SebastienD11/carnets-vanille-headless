@@ -8,7 +8,23 @@
 
 <script>
 import Vue from 'vue'
-import { mapState, mapActions } from 'vuex'
+import gql from 'graphql-tag'
+
+const GET_POST = gql`
+  query Post($slug: ID!) {
+    post(id: $slug, idType: SLUG) {
+      id
+      slug
+      title
+      content
+      categories {
+        nodes {
+          categoryId
+        }
+      }
+    }
+  }
+`
 
 export default Vue.extend({
   data() {
@@ -16,17 +32,14 @@ export default Vue.extend({
       slug: this.$route.params.slug,
     }
   },
-  computed: {
-    ...mapState(['posts']),
-    post() {
-      return this.posts.find((el) => el.slug === this.slug)
+  apollo: {
+    post: {
+      prefetch: true,
+      variables() {
+        return { slug: this.$route.params.slug }
+      },
+      query: GET_POST,
     },
-  },
-  created() {
-    this.getPosts()
-  },
-  methods: {
-    ...mapActions(['getPosts']),
   },
 })
 </script>

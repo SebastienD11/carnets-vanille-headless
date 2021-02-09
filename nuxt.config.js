@@ -5,7 +5,7 @@ const dynamicRoutes = () => {
   routes.push(
     axios
       .get(
-        'https://blog.carnetsvanille.com/wp-json/wp/v2/posts?page=1&per_page=99'
+        'https://blog.carnetsvanille.com/wp-json/wp/v2/posts?page=1&per_page=10'
       )
       .then((res) => {
         return res.data.map((post) => `/${post.slug}`)
@@ -45,7 +45,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/data.server.js', 'plugins/preview.client.js'],
+  plugins: ['plugins/preview.client.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
