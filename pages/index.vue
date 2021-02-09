@@ -1,5 +1,6 @@
 <template>
   <div class="max-w-screen-lg mx-auto p-10">
+    <h1>Try GraphQL (nuxt/apollo) - Without Store</h1>
     <div v-for="(post, index) in posts.nodes" :key="post.id">
       <div :key="index" class="lg:flex lg:max-w-screen-lg pb-8 lg:pb-16">
         <div class="lg:w-1/4"></div>
