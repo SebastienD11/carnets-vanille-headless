@@ -48,7 +48,7 @@ const GET_CATEGORIES = gql`
 `
 
 export const actions = {
-  async getPosts({ commit }) {
+  async getPosts({ commit, state }) {
     // if posts is already set, stop
     if (state.posts.length) return
     try {
@@ -60,7 +60,7 @@ export const actions = {
       console.error('getPosts:::', err)
     }
   },
-  async getCategories({ commit }) {
+  async getCategories({ commit, state }) {
     // if categories is already set, stop
     if (state.categories.length) return
     try {
