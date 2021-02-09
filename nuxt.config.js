@@ -1,24 +1,22 @@
 import axios from 'axios'
-const dynamicRoutes = () => {
-  const routes = []
+const dynamicRoutes = async () => {
+  const posts = await axios
+    .get(
+      'https://blog.carnetsvanille.com/wp-json/wp/v2/posts?page=1&per_page=99'
+    )
+    .then((res) => {
+      return res.data.map((post) => `/${post.slug}`)
+    })
 
-  routes.push(
-    axios
-      .get(
-        'https://blog.carnetsvanille.com/wp-json/wp/v2/posts?page=1&per_page=10'
-      )
-      .then((res) => {
-        return res.data.map((post) => `/${post.slug}`)
-      })
-  )
+  const categories = await axios
+    .get('https://blog.carnetsvanille.com/wp-json/wp/v2/categories')
+    .then((res) => {
+      return res.data.map((category) => `/category/${category.slug}`)
+    })
 
-  routes.push(
-    axios
-      .get('https://blog.carnetsvanille.com/wp-json/wp/v2/categories')
-      .then((res) => {
-        return res.data.map((category) => `/category/${category.slug}`)
-      })
-  )
+  const routes = posts.concat(categories)
+
+  console.log(routes)
 
   return routes
 }
