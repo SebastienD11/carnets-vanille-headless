@@ -53,12 +53,12 @@ export const actions = {
     // if (state.posts.length) return
     try {
       const posts = await this.app.apolloProvider.defaultClient.query({
-        prefetch: true,
+        // prefetch: true,
         query: GET_POSTS,
       })
       commit('SET_POSTS', posts.data.posts.nodes)
     } catch (err) {
-      console.error('getPosts', err)
+      console.error('getPosts:::', err)
     }
   },
   async getCategories({ commit }) {
@@ -66,7 +66,7 @@ export const actions = {
     // if (state.categories.length) return
     try {
       const categories = await this.app.apolloProvider.defaultClient.query({
-        prefetch: true,
+        // prefetch: true,
         query: GET_CATEGORIES,
       })
       commit('SET_CATEGORIES', categories.data.categories.nodes)
