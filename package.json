@@ -12,8 +12,11 @@
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.1",
+    "@nuxtjs/apollo": "^4.0.1-rc.5",
     "@nuxtjs/axios": "^5.12.5",
+    "apollo-fetch": "^0.7.0",
     "core-js": "^3.8.3",
+    "graphql-tag": "^2.11.0",
     "nuxt": "^2.14.12"
   },
   "devDependencies": {

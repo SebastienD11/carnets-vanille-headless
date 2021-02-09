@@ -6,6 +6,9 @@
           <h4 class="text-xl lg:text-3xl font-normal leading-tight">
             {{ category.name }}
           </h4>
+          <p>
+            {{ category.description }}
+          </p>
           <nuxt-link
             :to="`/category/${category.slug}`"
             class="underline p-4 text-red-500"

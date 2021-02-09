@@ -1,8 +1,8 @@
 <template>
   <div v-if="post" class="max-w-screen-lg mx-auto p-10">
     TEMPLATE POST _SLUG
-    {{ post.title.rendered }}
-    <div class="mb-4" v-html="post.content.rendered"></div>
+    {{ post.title }}
+    <div class="mb-4" v-html="post.content"></div>
   </div>
 </template>
 

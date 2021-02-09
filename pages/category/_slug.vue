@@ -11,7 +11,7 @@
         <div class="lg:w-1/4"></div>
         <div class="lg:w-3/4 lg:pl-8">
           <h4 class="text-xl lg:text-3xl font-normal leading-tight">
-            {{ post.title.rendered }}
+            {{ post.title }}
           </h4>
           <nuxt-link :to="`/${post.slug}`" class="underline p-4 text-red-500">
             post Info
@@ -38,7 +38,13 @@ export default Vue.extend({
       return this.categories.find((el) => el.slug === this.slug)
     },
     postsForCategory() {
-      return this.posts.filter((el) => el.categories.includes(this.category.id))
+      return this.posts.filter((el) => {
+        const categories = []
+        el.categories.nodes.forEach((category) => {
+          categories.push(category.categoryId)
+        })
+        return categories.includes(this.category.categoryId)
+      })
     },
   },
   created() {

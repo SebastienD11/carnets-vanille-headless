@@ -59,8 +59,14 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios'],
-
+  modules: ['@nuxtjs/axios', '@nuxtjs/apollo'],
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'https://blog.carnetsvanille.com/graphql',
+      },
+    },
+  },
   axios: {
     baseURL:
       process.env.VERCEL_ENV !== 'production'
