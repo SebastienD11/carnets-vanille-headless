@@ -58,7 +58,7 @@ export default Vue.extend({
     }
   },
   apollo: {
-    category: {\
+    category: {
       variables() {
         return { slug: this.$route.params.slug }
       },
