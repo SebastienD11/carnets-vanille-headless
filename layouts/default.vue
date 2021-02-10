@@ -1,5 +1,6 @@
 <template>
   <div>
+    <nuxt-link :to="`/`"><Logo /></nuxt-link>
     <Nuxt />
   </div>
 </template>
