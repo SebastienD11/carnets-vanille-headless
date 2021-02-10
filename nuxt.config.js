@@ -55,6 +55,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     'nuxt-graphql-request',
+    'nuxt-compress',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -89,7 +90,14 @@ export default {
         ? 'https://carnets-vanille-headless.vercel.app/'
         : 'http://localhost:3000/',
   },
-
+  'nuxt-compress': {
+    gzip: {
+      cache: true,
+    },
+    brotli: {
+      threshold: 10240,
+    },
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     analyze: true,
