@@ -3,6 +3,7 @@ import { gql } from 'nuxt-graphql-request'
 export const state = () => ({
   posts: [],
   categories: [],
+  settings: [],
 })
 
 export const getters = {}
@@ -14,11 +15,22 @@ export const mutations = {
   SET_CATEGORIES: (state, categories) => {
     state.categories = categories
   },
+  SET_SETTINGS: (state, settings) => {
+    state.settings = settings
+  },
 }
+
+const GET_SETTINGS = gql`
+  query getSettings {
+    allSettings {
+      readingSettingsPostsPerPage
+    }
+  }
+`
 
 const GET_POSTS = gql`
   query getPosts {
-    posts(first: 200) {
+    posts(first: 30) {
       nodes {
         id
         slug
@@ -48,6 +60,16 @@ const GET_CATEGORIES = gql`
 `
 
 export const actions = {
+  async getSettings({ commit }) {
+    // if posts is already set, stop
+    // if (state.settings.length) return
+    try {
+      const query = await this.$graphql.request(GET_SETTINGS)
+      commit('SET_SETTINGS', query.allSettings)
+    } catch (err) {
+      console.error('getSettings:::', err)
+    }
+  },
   async getPosts({ commit, state }) {
     // if posts is already set, stop
     if (state.posts.length) return
@@ -65,7 +87,7 @@ export const actions = {
       const query = await this.$graphql.request(GET_CATEGORIES)
       commit('SET_CATEGORIES', query.categories.nodes)
     } catch (err) {
-      console.error('getCategories', err)
+      console.error('getCategories:::', err)
     }
   },
 }

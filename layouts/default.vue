@@ -1,6 +1,7 @@
 <template>
   <div>
     <nuxt-link :to="`/`"><Logo /></nuxt-link>
+    <h1>Try GraphQL Request - With Store</h1>
     <Nuxt />
   </div>
 </template>

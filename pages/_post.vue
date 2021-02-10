@@ -1,6 +1,5 @@
 <template>
   <div v-if="post" class="max-w-screen-lg mx-auto p-10">
-    TEMPLATE POST _SLUG
     {{ post.title }}
     <div class="mb-4" v-html="post.content"></div>
   </div>
@@ -8,12 +7,12 @@
 
 <script>
 import Vue from 'vue'
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default Vue.extend({
   data() {
     return {
-      slug: this.$route.params.slug,
+      slug: this.$route.params.post,
     }
   },
   computed: {
@@ -21,12 +20,6 @@ export default Vue.extend({
     post() {
       return this.posts.find((el) => el.slug === this.slug)
     },
-  },
-  created() {
-    this.getPosts()
-  },
-  methods: {
-    ...mapActions(['getPosts']),
   },
 })
 </script>

@@ -13,7 +13,7 @@
             :to="`/category/${category.slug}`"
             class="underline p-4 text-red-500"
           >
-            post Info
+            Category Info
           </nuxt-link>
         </div>
       </div>
@@ -23,17 +23,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default Vue.extend({
   computed: {
     ...mapState(['categories']),
-  },
-  created() {
-    this.getCategories()
-  },
-  methods: {
-    ...mapActions(['getCategories']),
   },
 })
 </script>

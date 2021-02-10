@@ -1,6 +1,5 @@
 <template>
   <div class="max-w-screen-lg mx-auto p-10">
-    <h1>Try GraphQL Request - With Store</h1>
     <div class="flex">
       <div v-for="category in categories" :key="category.id">
         <div class="mx-4 px-2">
@@ -32,19 +31,11 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 export default Vue.extend({
   computed: {
-    ...mapState(['posts']),
-    ...mapState(['categories']),
-  },
-  created() {
-    this.getPosts()
-    this.getCategories()
-  },
-  methods: {
-    ...mapActions(['getPosts', 'getCategories']),
+    ...mapState(['posts', 'categories']),
   },
 })
 </script>
