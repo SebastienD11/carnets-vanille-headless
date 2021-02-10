@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from 'nuxt-graphql-request'
 
 export const state = () => ({
   posts: [],
@@ -52,10 +52,8 @@ export const actions = {
     // if posts is already set, stop
     if (state.posts.length) return
     try {
-      const posts = await this.app.apolloProvider.defaultClient.query({
-        query: GET_POSTS,
-      })
-      commit('SET_POSTS', posts.data.posts.nodes)
+      const query = await this.$graphql.request(GET_POSTS)
+      commit('SET_POSTS', query.posts.nodes)
     } catch (err) {
       console.error('getPosts:::', err)
     }
@@ -64,10 +62,8 @@ export const actions = {
     // if categories is already set, stop
     if (state.categories.length) return
     try {
-      const categories = await this.app.apolloProvider.defaultClient.query({
-        query: GET_CATEGORIES,
-      })
-      commit('SET_CATEGORIES', categories.data.categories.nodes)
+      const query = await this.$graphql.request(GET_CATEGORIES)
+      commit('SET_CATEGORIES', query.categories.nodes)
     } catch (err) {
       console.error('getCategories', err)
     }

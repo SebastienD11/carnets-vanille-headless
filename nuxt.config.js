@@ -54,16 +54,34 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    'nuxt-graphql-request',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios', '@nuxtjs/apollo'],
-  apollo: {
-    clientConfigs: {
-      default: {
-        httpEndpoint: 'https://blog.carnetsvanille.com/graphql',
-      },
-    },
+  modules: ['@nuxtjs/axios'],
+  graphql: {
+    /**
+     * Your GraphQL endpoint
+     */
+    endpoint: 'https://blog.carnetsvanille.com/graphql',
+
+    /**
+     * Options
+     * See: https://github.com/prisma-labs/graphql-request#passing-more-options-to-fetch
+     */
+    options: {},
+
+    /**
+     * Optional
+     * default: true (this includes cross-fetch/polyfill before creating the graphql client)
+     */
+    useFetchPolyfill: true,
+
+    /**
+     * Optional
+     * default: false (this includes graphql-tag for node_modules folder)
+     */
+    includeNodeModules: true,
   },
   axios: {
     baseURL:
@@ -73,7 +91,9 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    analyze: true,
+  },
   generate: {
     concurrency: 20,
     // routes: dynamicRoutes,

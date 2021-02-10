@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-screen-lg mx-auto p-10">
-    <h1>Try GraphQL (nuxt/apollo) - With Store</h1>
+    <h1>Try GraphQL Request - With Store</h1>
     <div class="flex">
       <div v-for="category in categories" :key="category.id">
         <div class="mx-4 px-2">
