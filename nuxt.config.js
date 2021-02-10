@@ -16,6 +16,8 @@ const dynamicRoutes = async () => {
 
   const routes = posts.concat(categories)
 
+  console.log(routes)
+
   return routes
 }
 
@@ -74,6 +76,6 @@ export default {
   build: {},
   generate: {
     concurrency: 20,
-    routes: dynamicRoutes,
+    // routes: dynamicRoutes,
   },
 }

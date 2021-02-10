@@ -21,7 +21,6 @@
           <h4 class="text-xl lg:text-3xl font-normal leading-tight">
             {{ post.title }}
           </h4>
-          <div class="mb-4" v-html="post.content"></div>
           <nuxt-link :to="`/${post.slug}`" class="underline p-4 text-red-500">
             post Info
           </nuxt-link>
