@@ -17,8 +17,28 @@ export default Vue.extend({
       slug: this.$route.params.post,
     }
   },
+  head() {
+    return {
+      htmlAttrs: {},
+      title:
+        this.post.seo.title ||
+        this.post.title + ' | ' + this.settings.generalSettingsTitle,
+      meta: [
+        { charset: 'utf-8' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.post.seo.metaDesc,
+        },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'canonical', href: this.$route.path },
+      ],
+    }
+  },
   computed: {
-    ...mapState(['posts']),
+    ...mapState(['posts', 'settings']),
     post() {
       return this.posts.find((el) => el.slug === this.slug)
     },

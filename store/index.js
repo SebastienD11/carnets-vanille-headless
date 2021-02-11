@@ -24,6 +24,7 @@ export const mutations = {
 const GET_SETTINGS = gql`
   query getSettings {
     allSettings {
+      generalSettingsTitle
       readingSettingsPostsPerPage
     }
   }
@@ -41,6 +42,27 @@ const GET_POSTS = gql`
           nodes {
             categoryId
           }
+        }
+        seo {
+          canonical
+          cornerstone
+          focuskw
+          metaDesc
+          metaKeywords
+          metaRobotsNofollow
+          metaRobotsNoindex
+          opengraphAuthor
+          opengraphDescription
+          opengraphModifiedTime
+          opengraphPublishedTime
+          opengraphPublisher
+          opengraphSiteName
+          opengraphTitle
+          opengraphType
+          opengraphUrl
+          title
+          twitterDescription
+          twitterTitle
         }
       }
     }
