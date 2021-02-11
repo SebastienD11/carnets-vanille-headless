@@ -21,6 +21,7 @@ Questions:
 [] Display thumbnail
 
 - SEO
+[] Create a service to deal with all of it
 [] Query Home SEO Settings from Yoast
 [] Query Fb & Twitter Meta from Yoast
 [] Query SEO meta & thumbnail for Posts > Categories
