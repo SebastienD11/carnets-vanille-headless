@@ -30,7 +30,7 @@ const GET_SETTINGS = gql`
 
 const GET_POSTS = gql`
   query getPosts {
-    posts(first: 30) {
+    posts(first: 200) {
       nodes {
         id
         slug

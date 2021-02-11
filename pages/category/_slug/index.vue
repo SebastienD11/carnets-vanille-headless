@@ -6,7 +6,7 @@
     COUNT: {{ category.count }} <br />
     <hr />
 
-    <div v-for="(post, index) in postsForCategory" :key="post.id">
+    <div v-for="(post, index) in postsList" :key="post.id">
       <div :key="index" class="lg:flex lg:max-w-screen-lg pb-8 lg:pb-16">
         <div class="lg:w-1/4"></div>
         <div class="lg:w-3/4 lg:pl-8">
@@ -35,22 +35,28 @@ import { mapState } from 'vuex'
 export default Vue.extend({
   data() {
     return {
-      slug: this.$route.params.category,
+      slug: this.$route.params.slug,
     }
   },
   computed: {
-    ...mapState(['categories', 'posts']),
+    ...mapState(['categories', 'posts', 'settings']),
     category() {
       return this.categories.find((el) => el.slug === this.slug)
     },
-    postsForCategory() {
-      return this.posts.filter((el) => {
+    postsList() {
+      const posts = this.posts.filter((el) => {
         const categories = []
         el.categories.nodes.forEach((category) => {
           categories.push(category.categoryId)
         })
         return categories.includes(this.category.categoryId)
       })
+      return this.postPerPage(posts)
+    },
+  },
+  methods: {
+    postPerPage(posts) {
+      return posts.slice(0, this.settings.readingSettingsPostsPerPage)
     },
   },
 })
