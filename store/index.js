@@ -11,6 +11,7 @@ export const getters = {}
 export const mutations = {
   SET_POSTS: (state, posts) => {
     state.posts = posts
+    state.settings.totalCountPost = posts.length
   },
   SET_CATEGORIES: (state, categories) => {
     state.categories = categories
@@ -61,8 +62,6 @@ const GET_CATEGORIES = gql`
 
 export const actions = {
   async getSettings({ commit }) {
-    // if posts is already set, stop
-    // if (state.settings.length) return
     try {
       const query = await this.$graphql.request(GET_SETTINGS)
       commit('SET_SETTINGS', query.allSettings)

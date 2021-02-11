@@ -1,8 +1,8 @@
 <template>
-  <div class="max-w-screen-lg mx-auto p-10">
+  <div>
     <div v-for="(category, index) in categories" :key="category.id">
-      <div :key="index" class="lg:flex lg:max-w-screen-lg pb-8 lg:pb-16">
-        <div class="lg:w-3/4 lg:pl-8">
+      <div :key="index">
+        <div>
           <h4 class="text-xl lg:text-3xl font-normal leading-tight">
             {{ category.name }}
           </h4>

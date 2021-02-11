@@ -1,6 +1,8 @@
 <template>
-  <div v-if="post" class="max-w-screen-lg mx-auto p-10">
-    {{ post.title }}
+  <div v-if="post">
+    <h1 class="text-2xl text-center mb-12">
+      {{ post.title }}
+    </h1>
     <div class="mb-4" v-html="post.content"></div>
   </div>
 </template>
