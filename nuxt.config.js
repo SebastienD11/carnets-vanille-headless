@@ -1,26 +1,3 @@
-import axios from 'axios'
-const dynamicRoutes = async () => {
-  const posts = await axios
-    .get(
-      'https://blog.carnetsvanille.com/wp-json/wp/v2/posts?page=1&per_page=99'
-    )
-    .then((res) => {
-      return res.data.map((post) => `/${post.slug}`)
-    })
-
-  const categories = await axios
-    .get('https://blog.carnetsvanille.com/wp-json/wp/v2/categories')
-    .then((res) => {
-      return res.data.map((category) => `/category/${category.slug}`)
-    })
-
-  const routes = posts.concat(categories)
-
-  console.log(routes)
-
-  return routes
-}
-
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -104,6 +81,5 @@ export default {
   },
   generate: {
     concurrency: 20,
-    // routes: dynamicRoutes,
   },
 }
