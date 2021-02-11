@@ -1,28 +1,28 @@
 <template>
   <div class="flex justify-between">
     <nuxt-link
-      :disabled="!hasPreviousPage"
+      v-if="hasPreviousPage"
       :to="`${slug}/${currentPage - 1}`"
       :class="{
-        'pointer-events-none text-gray-500': !hasPreviousPage,
         'underline text-red-500': hasPreviousPage,
       }"
     >
       Recent
     </nuxt-link>
+    <span v-if="!hasPreviousPage" class="text-gray-500"> Recent </span>
     <div>
       {{ totalPosts }}
     </div>
     <nuxt-link
-      :disabled="!hasNextPage"
+      v-if="hasNextPage"
       :to="`${slug}/${currentPage + 1}`"
       :class="{
-        'pointer-events-none text-gray-500': !hasNextPage,
         'underline text-red-500': hasNextPage,
       }"
     >
       Older
     </nuxt-link>
+    <span v-if="!hasNextPage" class="text-gray-500"> Older </span>
   </div>
 </template>
 <script lang="ts">
