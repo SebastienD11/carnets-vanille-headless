@@ -44,6 +44,11 @@ const GET_POSTS = gql`
             categoryId
           }
         }
+        featuredImage {
+          node {
+            sourceUrl(size: THUMBNAIL)
+          }
+        }
         seo {
           canonical
           cornerstone

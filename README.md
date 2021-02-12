@@ -18,10 +18,10 @@ Questions:
 
 - Posts
   - [] Query and display Tags taxonomy the same way as Categories
-  - [] Display thumbnail
+  - [x] Display thumbnail
 
 - SEO
-  - [] Create a service to deal with all of it
+  - [] Create a service/module/plugin to deal with all of it
   - [] Query Home SEO Settings from Yoast
   - [] Query Fb & Twitter Meta from Yoast
   - [x] Query SEO meta & thumbnail for Posts > Categories
@@ -30,9 +30,6 @@ Questions:
   - [] Create Sitemap.xml
   - [] Create Robot.xml
   - [] Add Structured Data
-
-- Pagination
-  - [] Create a service for pagination (it will be used for the prev/next rel link on paginated page)
 
 - Menu
   - [] Query Menu from WP
