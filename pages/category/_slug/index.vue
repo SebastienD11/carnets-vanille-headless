@@ -2,12 +2,7 @@
   <div v-if="category">
     <h1 class="text-2xl text-center mb-12">{{ category.name }}</h1>
     <PostsList :posts="postsList" />
-    <Pagination
-      :current-page="1"
-      :slug="'/category/' + slug"
-      :total-posts="totalPostForCategory"
-      :posts-per-page="settings.readingSettingsPostsPerPage"
-    />
+    <Pagination :has-next-page="hasNextPage" :next-page-link="nextPageLink" />
   </div>
 </template>
 
@@ -22,6 +17,29 @@ export default Vue.extend({
       totalPostForCategory: null,
     }
   },
+  head() {
+    return {
+      htmlAttrs: {
+        lang: this.settings.generalSettingsLanguage,
+      },
+      title:
+        this.category.seo.title ||
+        this.category.title + ' | ' + this.settings.generalSettingsTitle,
+      meta: [
+        { charset: 'utf-8' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.category.seo.metaDesc,
+        },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'canonical', href: this.$route.path },
+        { rel: 'next', href: this.nextPageLink },
+      ],
+    }
+  },
   computed: {
     ...mapState(['categories', 'posts', 'settings']),
     category() {
@@ -29,6 +47,20 @@ export default Vue.extend({
     },
     postsList() {
       return this.postPerPage(this.postForCategory())
+    },
+    hasNextPage() {
+      if (
+        this.settings.readingSettingsPostsPerPage < this.totalPostForCategory
+      ) {
+        return true
+      }
+      return false
+    },
+    nextPageLink() {
+      if (!this.hasNextPage) {
+        return ''
+      }
+      return '/category/' + this.slug + '/2'
     },
   },
   methods: {

@@ -19,7 +19,9 @@ export default Vue.extend({
   },
   head() {
     return {
-      htmlAttrs: {},
+      htmlAttrs: {
+        lang: this.settings.generalSettingsLanguage,
+      },
       title:
         this.post.seo.title ||
         this.post.title + ' | ' + this.settings.generalSettingsTitle,

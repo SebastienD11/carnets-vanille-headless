@@ -26,6 +26,7 @@ const GET_SETTINGS = gql`
     allSettings {
       generalSettingsTitle
       readingSettingsPostsPerPage
+      generalSettingsLanguage
     }
   }
 `
@@ -77,6 +78,27 @@ const GET_CATEGORIES = gql`
         description
         categoryId
         slug
+        seo {
+          canonical
+          cornerstone
+          focuskw
+          metaDesc
+          metaKeywords
+          metaRobotsNofollow
+          metaRobotsNoindex
+          opengraphAuthor
+          opengraphDescription
+          opengraphModifiedTime
+          opengraphPublishedTime
+          opengraphPublisher
+          opengraphSiteName
+          opengraphTitle
+          opengraphType
+          opengraphUrl
+          title
+          twitterDescription
+          twitterTitle
+        }
       }
     }
   }

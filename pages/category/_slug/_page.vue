@@ -5,10 +5,10 @@
     </h1>
     <PostsList :posts="postsList" />
     <Pagination
-      :current-page="Number.parseInt(page)"
-      :slug="'/category/' + slug"
-      :total-posts="totalPostForCategory"
-      :posts-per-page="settings.readingSettingsPostsPerPage"
+      :has-previous-page="hasPreviousPage"
+      :previous-page-link="previousPageLink"
+      :has-next-page="hasNextPage"
+      :next-page-link="nextPageLink"
     />
   </div>
 </template>
@@ -25,6 +25,30 @@ export default Vue.extend({
       totalPostForCategory: null,
     }
   },
+  head() {
+    return {
+      htmlAttrs: {
+        lang: this.settings.generalSettingsLanguage,
+      },
+      title:
+        this.category.seo.title ||
+        this.category.title + ' | ' + this.settings.generalSettingsTitle,
+      meta: [
+        { charset: 'utf-8' },
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.category.seo.metaDesc,
+        },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'canonical', href: this.$route.path },
+        { rel: 'prev', href: this.previousPageLink },
+        { rel: 'next', href: this.nextPageLink },
+      ],
+    }
+  },
   computed: {
     ...mapState(['settings', 'categories', 'posts']),
     category() {
@@ -32,6 +56,37 @@ export default Vue.extend({
     },
     postsList() {
       return this.postPerPage(this.postForCategory())
+    },
+    hasPreviousPage() {
+      if (this.page > 1) {
+        return true
+      }
+      return false
+    },
+    hasNextPage() {
+      if (
+        Number.parseInt(this.page) * this.settings.readingSettingsPostsPerPage <
+        this.totalPostForCategory
+      ) {
+        return true
+      }
+      return false
+    },
+    previousPageLink() {
+      if (!this.hasPreviousPage) {
+        return ''
+      }
+      if (this.page === '2') {
+        return '/category/' + this.slug
+      } else {
+        return '/category/' + this.slug + '/' + (Number.parseInt(this.page) - 1)
+      }
+    },
+    nextPageLink() {
+      if (!this.hasNextPage) {
+        return ''
+      }
+      return '/category/' + this.slug + '/' + (Number.parseInt(this.page) + 1)
     },
   },
   methods: {

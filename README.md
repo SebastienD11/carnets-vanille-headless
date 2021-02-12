@@ -24,7 +24,14 @@ Questions:
 [] Create a service to deal with all of it
 [] Query Home SEO Settings from Yoast
 [] Query Fb & Twitter Meta from Yoast
-[] Query SEO meta & thumbnail for Posts > Categories
+[x] Query SEO meta & thumbnail for Posts > Categories
 [] Query SEO meta & thumbnail for Tags > Tags
-[] Add Rel link on pagination link and pages
+[x] Add Rel link on paginated pages
+[] Create Sitemap.xml
+[] Create Robot.xml
 
+- Pagination
+[] Create a service for pagination (it will be used for the prev/next rel link on paginated page)
+
+- Menu
+[] Query Menu from WP

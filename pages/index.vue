@@ -11,7 +11,9 @@ import { mapState } from 'vuex'
 export default Vue.extend({
   head() {
     return {
-      htmlAttrs: {},
+      htmlAttrs: {
+        lang: this.settings.generalSettingsLanguage,
+      },
       title: this.settings.generalSettingsTitle,
       meta: [
         { charset: 'utf-8' },
