@@ -67,6 +67,6 @@ export default {
     analyze: true,
   },
   generate: {
-    concurrency: 20,
+    concurrency: 16,
   },
 }
