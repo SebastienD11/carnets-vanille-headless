@@ -14,7 +14,7 @@ Questions:
   - [] Default Style for Gutenberg Element
 
 - Pages
-  - [] Query and display page the same way as post
+  - [x] Query and display page the same way as post
 
 - Posts
   - [] Query and display Tags taxonomy the same way as Categories
@@ -32,4 +32,4 @@ Questions:
   - [] Add Structured Data
 
 - Menu
-  - [] Query Menu from WP
+  - [x] Query Menu from WP
