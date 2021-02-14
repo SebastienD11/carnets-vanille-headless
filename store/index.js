@@ -1,6 +1,7 @@
 import { gql } from 'nuxt-graphql-request'
 
 export const state = () => ({
+  pages: [],
   posts: [],
   categories: [],
   settings: [],
@@ -9,6 +10,9 @@ export const state = () => ({
 export const getters = {}
 
 export const mutations = {
+  SET_PAGES: (state, pages) => {
+    state.posts = pages
+  },
   SET_POSTS: (state, posts) => {
     state.posts = posts
     state.settings.totalCountPost = posts.length
@@ -27,6 +31,40 @@ const GET_SETTINGS = gql`
       generalSettingsTitle
       readingSettingsPostsPerPage
       generalSettingsLanguage
+    }
+  }
+`
+
+const GET_PAGES = gql`
+  query getPosts {
+    posts(first: 200) {
+      nodes {
+        id
+        slug
+        title
+        content
+        seo {
+          canonical
+          cornerstone
+          focuskw
+          metaDesc
+          metaKeywords
+          metaRobotsNofollow
+          metaRobotsNoindex
+          opengraphAuthor
+          opengraphDescription
+          opengraphModifiedTime
+          opengraphPublishedTime
+          opengraphPublisher
+          opengraphSiteName
+          opengraphTitle
+          opengraphType
+          opengraphUrl
+          title
+          twitterDescription
+          twitterTitle
+        }
+      }
     }
   }
 `
@@ -116,6 +154,16 @@ export const actions = {
       commit('SET_SETTINGS', query.allSettings)
     } catch (err) {
       console.error('getSettings:::', err)
+    }
+  },
+  async getPages({ commit, state }) {
+    // if posts is already set, stop
+    if (state.pages.length) return
+    try {
+      const query = await this.$graphql.request(GET_PAGES)
+      commit('SET_PAGES', query.pages.nodes)
+    } catch (err) {
+      console.error('getPages:::', err)
     }
   },
   async getPosts({ commit, state }) {
