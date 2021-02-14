@@ -4,6 +4,7 @@ export const state = () => ({
   pages: [],
   posts: [],
   categories: [],
+  menus: { 'main-menu': [], 'footer-menu': [] },
   settings: [],
 })
 
@@ -11,7 +12,13 @@ export const getters = {}
 
 export const mutations = {
   SET_PAGES: (state, pages) => {
-    state.posts = pages
+    state.pages = pages
+  },
+  SET_MAIN_MENU: (state, menu) => {
+    state.menus['main-menu'] = menu
+  },
+  SET_FOOTER_MENU: (state, menu) => {
+    state.menus['footer-menu'] = menu
   },
   SET_POSTS: (state, posts) => {
     state.posts = posts
@@ -25,6 +32,57 @@ export const mutations = {
   },
 }
 
+const GET_MAIN_MENU = gql`
+  query getMainMenu {
+    menus(where: { location: MAIN_MENU }) {
+      nodes {
+        locations
+        menuItems {
+          nodes {
+            connectedNode {
+              node {
+                ... on Page {
+                  title
+                  uri
+                  slug
+                }
+                ... on Category {
+                  name
+                  uri
+                  slug
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+const GET_FOOTER_MENU = gql`
+  query getFooterMenu {
+    menus(where: { location: FOOTER_MENU }) {
+      nodes {
+        locations
+        menuItems {
+          nodes {
+            connectedNode {
+              node {
+                ... on Page {
+                  title
+                  uri
+                  slug
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 const GET_SETTINGS = gql`
   query getSettings {
     allSettings {
@@ -36,8 +94,8 @@ const GET_SETTINGS = gql`
 `
 
 const GET_PAGES = gql`
-  query getPosts {
-    posts(first: 200) {
+  query getPages {
+    pages(first: 200) {
       nodes {
         id
         slug
@@ -156,6 +214,23 @@ export const actions = {
       console.error('getSettings:::', err)
     }
   },
+  async getMainMenu({ commit }) {
+    try {
+      const query = await this.$graphql.request(GET_MAIN_MENU)
+      commit('SET_MAIN_MENU', query.menus.nodes)
+    } catch (err) {
+      console.error('getMainMenu:::', err)
+    }
+  },
+  async getFooterMenu({ commit }) {
+    try {
+      const query = await this.$graphql.request(GET_FOOTER_MENU)
+      commit('SET_FOOTER_MENU', query.menus.nodes)
+    } catch (err) {
+      console.error('getFooterMenu:::', err)
+    }
+  },
+
   async getPages({ commit, state }) {
     // if posts is already set, stop
     if (state.pages.length) return
