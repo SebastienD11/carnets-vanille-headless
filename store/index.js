@@ -1,4 +1,9 @@
-import { gql } from 'nuxt-graphql-request'
+// import { gql } from 'nuxt-graphql-request'
+import getPosts from '../queries/posts.gql'
+import getCategories from '../queries/categories.gql'
+import getPages from '../queries/pages.gql'
+import getMenus from '../queries/menus.gql'
+import getSettings from '../queries/settings.gql'
 
 export const state = () => ({
   pages: [],
@@ -32,183 +37,10 @@ export const mutations = {
   },
 }
 
-const GET_MAIN_MENU = gql`
-  query getMainMenu {
-    menus(where: { location: MAIN_MENU }) {
-      nodes {
-        locations
-        menuItems {
-          nodes {
-            connectedNode {
-              node {
-                ... on Page {
-                  title
-                  uri
-                  slug
-                }
-                ... on Category {
-                  name
-                  uri
-                  slug
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
-const GET_FOOTER_MENU = gql`
-  query getFooterMenu {
-    menus(where: { location: FOOTER_MENU }) {
-      nodes {
-        locations
-        menuItems {
-          nodes {
-            connectedNode {
-              node {
-                ... on Page {
-                  title
-                  uri
-                  slug
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
-
-const GET_SETTINGS = gql`
-  query getSettings {
-    allSettings {
-      generalSettingsTitle
-      readingSettingsPostsPerPage
-      generalSettingsLanguage
-    }
-  }
-`
-
-const GET_PAGES = gql`
-  query getPages {
-    pages(first: 200) {
-      nodes {
-        id
-        slug
-        title
-        content
-        seo {
-          canonical
-          cornerstone
-          focuskw
-          metaDesc
-          metaKeywords
-          metaRobotsNofollow
-          metaRobotsNoindex
-          opengraphAuthor
-          opengraphDescription
-          opengraphModifiedTime
-          opengraphPublishedTime
-          opengraphPublisher
-          opengraphSiteName
-          opengraphTitle
-          opengraphType
-          opengraphUrl
-          title
-          twitterDescription
-          twitterTitle
-        }
-      }
-    }
-  }
-`
-
-const GET_POSTS = gql`
-  query getPosts {
-    posts(first: 200) {
-      nodes {
-        id
-        slug
-        title
-        content
-        categories {
-          nodes {
-            categoryId
-          }
-        }
-        featuredImage {
-          node {
-            sourceUrl(size: THUMBNAIL)
-          }
-        }
-        seo {
-          canonical
-          cornerstone
-          focuskw
-          metaDesc
-          metaKeywords
-          metaRobotsNofollow
-          metaRobotsNoindex
-          opengraphAuthor
-          opengraphDescription
-          opengraphModifiedTime
-          opengraphPublishedTime
-          opengraphPublisher
-          opengraphSiteName
-          opengraphTitle
-          opengraphType
-          opengraphUrl
-          title
-          twitterDescription
-          twitterTitle
-        }
-      }
-    }
-  }
-`
-const GET_CATEGORIES = gql`
-  query getCategories {
-    categories {
-      nodes {
-        name
-        count
-        description
-        categoryId
-        slug
-        seo {
-          canonical
-          cornerstone
-          focuskw
-          metaDesc
-          metaKeywords
-          metaRobotsNofollow
-          metaRobotsNoindex
-          opengraphAuthor
-          opengraphDescription
-          opengraphModifiedTime
-          opengraphPublishedTime
-          opengraphPublisher
-          opengraphSiteName
-          opengraphTitle
-          opengraphType
-          opengraphUrl
-          title
-          twitterDescription
-          twitterTitle
-        }
-      }
-    }
-  }
-`
-
 export const actions = {
   async getSettings({ commit }) {
     try {
-      const query = await this.$graphql.request(GET_SETTINGS)
+      const query = await this.$graphql.request(getSettings)
       commit('SET_SETTINGS', query.allSettings)
     } catch (err) {
       console.error('getSettings:::', err)
@@ -216,16 +48,16 @@ export const actions = {
   },
   async getMainMenu({ commit }) {
     try {
-      const query = await this.$graphql.request(GET_MAIN_MENU)
-      commit('SET_MAIN_MENU', query.menus.nodes)
+      const query = await this.$graphql.request(getMenus)
+      commit('SET_MAIN_MENU', query.mainMenu.nodes)
     } catch (err) {
       console.error('getMainMenu:::', err)
     }
   },
   async getFooterMenu({ commit }) {
     try {
-      const query = await this.$graphql.request(GET_FOOTER_MENU)
-      commit('SET_FOOTER_MENU', query.menus.nodes)
+      const query = await this.$graphql.request(getMenus)
+      commit('SET_FOOTER_MENU', query.footerMenu.nodes)
     } catch (err) {
       console.error('getFooterMenu:::', err)
     }
@@ -235,7 +67,7 @@ export const actions = {
     // if posts is already set, stop
     if (state.pages.length) return
     try {
-      const query = await this.$graphql.request(GET_PAGES)
+      const query = await this.$graphql.request(getPages)
       commit('SET_PAGES', query.pages.nodes)
     } catch (err) {
       console.error('getPages:::', err)
@@ -245,7 +77,7 @@ export const actions = {
     // if posts is already set, stop
     if (state.posts.length) return
     try {
-      const query = await this.$graphql.request(GET_POSTS)
+      const query = await this.$graphql.request(getPosts)
       commit('SET_POSTS', query.posts.nodes)
     } catch (err) {
       console.error('getPosts:::', err)
@@ -255,7 +87,7 @@ export const actions = {
     // if categories is already set, stop
     if (state.categories.length) return
     try {
-      const query = await this.$graphql.request(GET_CATEGORIES)
+      const query = await this.$graphql.request(getCategories)
       commit('SET_CATEGORIES', query.categories.nodes)
     } catch (err) {
       console.error('getCategories:::', err)

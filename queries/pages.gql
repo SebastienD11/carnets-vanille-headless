@@ -1,0 +1,31 @@
+query getPages {
+  pages(first: 200) {
+    nodes {
+      id
+      slug
+      title
+      content
+      seo {
+        canonical
+        cornerstone
+        focuskw
+        metaDesc
+        metaKeywords
+        metaRobotsNofollow
+        metaRobotsNoindex
+        opengraphAuthor
+        opengraphDescription
+        opengraphModifiedTime
+        opengraphPublishedTime
+        opengraphPublisher
+        opengraphSiteName
+        opengraphTitle
+        opengraphType
+        opengraphUrl
+        title
+        twitterDescription
+        twitterTitle
+      }
+    }
+  }
+}
