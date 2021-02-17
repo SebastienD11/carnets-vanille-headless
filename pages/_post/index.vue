@@ -3,7 +3,7 @@
     <h1 class="text-2xl text-center mb-12">
       {{ post.title }}
     </h1>
-    <div class="mb-4" v-html="post.content"></div>
+    <div class="mb-4 prose lg:prose-xl" v-html="post.content"></div>
   </div>
 </template>
 

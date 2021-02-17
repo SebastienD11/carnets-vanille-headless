@@ -10,7 +10,7 @@ Questions:
   - [] Set API_URL in an environment variable
 
 - Theme
-  - [] Default Style for Font
+  - [x] Default Style for Font
   - [] Default Style for Gutenberg Element
 
 - Pages
