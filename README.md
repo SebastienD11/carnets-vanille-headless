@@ -13,6 +13,9 @@ Questions:
   - [x] Default Style for Font
   - [] Default Style for Gutenberg Element
 
+- Home
+  - [x] Paginated home
+
 - Pages
   - [x] Query and display page the same way as post
 
