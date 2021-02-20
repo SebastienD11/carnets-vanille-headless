@@ -1,11 +1,9 @@
 <template>
-  <div class="max-w-screen-lg mx-auto p-10">
+  <div class="max-w-screen-lg p-10 mx-auto">
     <nuxt-link :to="`/`"><Logo /></nuxt-link>
-    <h1 class="text-2xl text-center my-12">Try GraphQL Request - With Store</h1>
-    <MainMenu />
-    <hr class="my-12" />
+    <MainMenu class="my-12" />
     <Nuxt />
-    <hr class="my-12" />
+    <hr class="my-6" />
     <FooterMenu />
   </div>
 </template>

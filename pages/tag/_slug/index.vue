@@ -1,6 +1,8 @@
 <template>
   <div v-if="tag">
-    <h1 class="mb-12 text-2xl text-center">{{ tag.name }}</h1>
+    <h1 class="lg:text-5xl mb-12 text-xl font-bold leading-tight text-center">
+      {{ tag.name }}
+    </h1>
     <PostsList :posts="postsList" />
     <Pagination :has-next-page="hasNextPage" :next-page-link="nextPageLink" />
   </div>

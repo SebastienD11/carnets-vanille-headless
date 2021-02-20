@@ -1,10 +1,10 @@
 <template>
-  <div class="flex">
+  <div class="flex justify-center">
     <div v-for="item in mainMenu">
-      <div class="mx-4 px-2">
+      <div class="px-2 mx-4">
         <nuxt-link
           :to="getSlug(item.connectedNode.node.uri)"
-          class="underline p-4 text-red-500"
+          class="p-4 text-red-500 underline"
         >
           <h4 class="font-normal leading-tight text-red-500">
             {{ item.connectedNode.node.name }}

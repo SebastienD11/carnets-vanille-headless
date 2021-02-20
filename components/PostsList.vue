@@ -1,15 +1,20 @@
 <template>
-  <div>
-    <div v-for="(post, index) in posts" :key="post.id" class="mb-6">
-      <div :key="index" class="">
-        <div class="flex">
-          <img
-            v-if="featuredImage(post)"
-            :src="featuredImage(post)"
-            width="100"
-            class="mr-4"
-          />
-          <div>
+  <div class="max-w-prose">
+    <nuxt-link
+      v-for="post in posts"
+      :key="post.id"
+      :to="`/article/${post.slug}`"
+      class="hover:bg-gray-100 flex items-center p-12 mb-12"
+    >
+      <img
+        v-if="featuredImage(post)"
+        width="100"
+        :src="featuredImage(post)"
+        class="mr-12 bg-gray-100 border-none rounded"
+      />
+      <div class="flex flex-col justify-between">
+        <div>
+          <div v-if="post.tags" class="mb-4">
             <nuxt-link
               v-for="tag in post.tags.nodes"
               :key="tag.tagId"
@@ -18,16 +23,13 @@
             >
               {{ tag.name }}
             </nuxt-link>
-            <h4 class="lg:text-3xl text-xl font-normal leading-tight">
-              {{ post.title }}
-            </h4>
-            <nuxt-link :to="`/${post.slug}`" class="text-red-500 underline">
-              post Info
-            </nuxt-link>
           </div>
+          <h4 class="lg:text-5xl mb-4 text-xl font-bold leading-tight">
+            {{ post.title }}
+          </h4>
         </div>
       </div>
-    </div>
+    </nuxt-link>
   </div>
 </template>
 

@@ -1,9 +1,9 @@
 <template>
   <div v-if="page">
-    <h1 class="text-2xl text-center mb-12">
+    <h1 class="mb-12 text-2xl text-center">
       {{ page.title }}
     </h1>
-    <div class="mb-4 prose lg:prose-xl" v-html="page.content"></div>
+    <div class="lg:prose-xl mb-4 prose" v-html="page.content"></div>
   </div>
 </template>
 

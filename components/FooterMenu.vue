@@ -1,16 +1,14 @@
 <template>
   <div class="flex">
     <div v-for="item in mainMenu">
-      <div class="mx-4 px-2">
-        <nuxt-link
-          :to="getSlug(item.connectedNode.node.uri)"
-          class="underline p-4 text-red-500"
-        >
-          <h4 class="font-normal leading-tight text-red-500">
-            {{ item.connectedNode.node.title }}
-          </h4>
-        </nuxt-link>
-      </div>
+      <nuxt-link
+        :to="getSlug(item.connectedNode.node.uri)"
+        class="p-4 text-red-500 underline"
+      >
+        <h4 class="font-normal leading-tight text-red-500">
+          {{ item.connectedNode.node.title }}
+        </h4>
+      </nuxt-link>
     </div>
   </div>
 </template>

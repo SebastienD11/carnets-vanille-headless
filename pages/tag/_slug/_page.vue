@@ -1,6 +1,6 @@
 <template>
   <div v-if="tag">
-    <h1 class="mb-12 text-2xl text-center">
+    <h1 class="lg:text-5xl mb-12 text-xl font-bold leading-tight text-center">
       {{ tag.name }} (page: {{ page }})
     </h1>
     <PostsList :posts="postsList" />

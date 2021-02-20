@@ -20,7 +20,7 @@ Questions:
   - [x] Query and display page the same way as post
 
 - Posts
-  - [] Query and display Tags taxonomy the same way as Categories
+  - [x] Query and display Tags taxonomy the same way as Categories
   - [x] Display thumbnail
 
 - SEO

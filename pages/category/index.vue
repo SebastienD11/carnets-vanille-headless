@@ -3,7 +3,7 @@
     <div v-for="(category, index) in categories" :key="category.id">
       <div :key="index">
         <div>
-          <h4 class="text-xl lg:text-3xl font-normal leading-tight">
+          <h4 class="lg:text-3xl text-xl font-normal leading-tight">
             {{ category.name }}
           </h4>
           <p>
@@ -11,7 +11,7 @@
           </p>
           <nuxt-link
             :to="`/category/${category.slug}`"
-            class="underline p-4 text-red-500"
+            class="p-4 text-red-500 underline"
           >
             Category Info
           </nuxt-link>
