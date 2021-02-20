@@ -1,6 +1,7 @@
 // import { gql } from 'nuxt-graphql-request'
 import getPosts from '../queries/posts.gql'
 import getCategories from '../queries/categories.gql'
+import getTags from '../queries/tags.gql'
 import getPages from '../queries/pages.gql'
 import getMenus from '../queries/menus.gql'
 import getSettings from '../queries/settings.gql'
@@ -9,6 +10,7 @@ export const state = () => ({
   pages: [],
   posts: [],
   categories: [],
+  tags: [],
   menus: { 'main-menu': [], 'footer-menu': [] },
   settings: [],
 })
@@ -31,6 +33,9 @@ export const mutations = {
   },
   SET_CATEGORIES: (state, categories) => {
     state.categories = categories
+  },
+  SET_TAGS: (state, tags) => {
+    state.tags = tags
   },
   SET_SETTINGS: (state, settings) => {
     state.settings = settings
@@ -91,6 +96,16 @@ export const actions = {
       commit('SET_CATEGORIES', query.categories.nodes)
     } catch (err) {
       console.error('getCategories:::', err)
+    }
+  },
+  async getTags({ commit, state }) {
+    // if categories is already set, stop
+    if (state.tags.length) return
+    try {
+      const query = await this.$graphql.request(getTags)
+      commit('SET_TAGS', query.tags.nodes)
+    } catch (err) {
+      console.error('getTags:::', err)
     }
   },
 }

@@ -5,4 +5,5 @@ export default async ({ store }) => {
   await store.dispatch('getFooterMenu')
   await store.dispatch('getPosts')
   await store.dispatch('getCategories')
+  await store.dispatch('getTags')
 }

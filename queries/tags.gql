@@ -1,27 +1,11 @@
-query getPosts {
-  posts(first: 200) {
+query getTags {
+  tags {
     nodes {
-      id
+      name
+      count
+      description
+      tagId
       slug
-      title
-      content
-      categories {
-        nodes {
-          categoryId
-        }
-      }
-      tags {
-        nodes {
-          tagId
-          name
-          slug
-        }
-      }
-      featuredImage {
-        node {
-          sourceUrl(size: THUMBNAIL)
-        }
-      }
       seo {
         canonical
         cornerstone
