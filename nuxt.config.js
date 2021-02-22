@@ -12,6 +12,23 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
+  head: {
+    htmlAttrs: {
+      lang: 'fr_FR',
+    },
+    title: 'Nuxt Wordpress Boilerplate',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'A modern WordPress & Nuxt boilerplate for building static generated blog.',
+      },
+      { charset: 'utf-8' },
+    ],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  },
+
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript

@@ -19,24 +19,17 @@ export default Vue.extend({
   },
   head() {
     return {
-      htmlAttrs: {
-        lang: this.settings.generalSettingsLanguage,
-      },
       title:
         this.page.seo.title ||
         this.page.title + ' | ' + this.settings.generalSettingsTitle,
       meta: [
-        { charset: 'utf-8' },
         {
           hid: 'description',
           name: 'description',
           content: this.page.seo.metaDesc,
         },
       ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'canonical', href: this.$route.path },
-      ],
+      link: [{ rel: 'canonical', href: this.$route.path }],
     }
   },
   computed: {

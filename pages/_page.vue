@@ -21,21 +21,9 @@ export default Vue.extend({
     }
   },
   head() {
+    /* For the home page, the meta title and meta description are setup inside the nuxt.config.js */
     return {
-      htmlAttrs: {
-        lang: this.settings.generalSettingsLanguage,
-      },
-      title: this.settings.generalSettingsTitle,
-      meta: [
-        { charset: 'utf-8' },
-        {
-          hid: 'description',
-          name: 'description',
-          content: '',
-        },
-      ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'canonical', href: this.$route.path },
         { rel: 'prev', href: this.previousPageLink },
         { rel: 'next', href: this.nextPageLink },
